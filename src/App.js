@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+//import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -32,9 +33,8 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState(
-      {persons: persons})
-    }
+    this.setState( {persons: persons} )
+  }
 
   togglePersonsHandler = () => {
     const does = this.state.show;
@@ -51,12 +51,18 @@ class App extends Component {
   render() {
 
     const style={
-      backGroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherint',
       border: '1x solid blue',
       padding: '8px',
       cursor: 'pointer'
-    }
+      //,
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'red'
+      //}
+    };
 
     let persons = null;
 
@@ -74,21 +80,39 @@ class App extends Component {
           })}
           </div>
       );
-    }
+
+      style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'darkgreen',
+      // color: 'white'
+      // }
+        };
+
+    //let classes = ['red', 'bold'].join(' ');
+    let classes = [];
+if (this.state.persons.length <= 2){
+  classes.push('red'); // classes = ['red']
+}
+if (this.state.persons.length <= 1){
+  classes.push('bold'); // classes = ['red', 'bold']
+}
 
     return (
+      //<StyleRoot>
       <div className="App">
         <h1>Hi</h1>
-        <p>Wow</p>
+        <p className={classes.join(' ')}>Vamos colorir</p>
         <button 
           style={style}
           onClick={this.togglePersonsHandler}>Mostrar!</button>
           {persons}
       </div>
+      //</StyleRoot>
     );
 
    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi'));
   }
 }
 
+//export default Radium(App);
 export default App;
